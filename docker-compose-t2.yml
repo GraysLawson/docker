@@ -8,7 +8,7 @@ version: "3.9"
 # DOCKER-COMPOSE FOR MEDIA SERVER
 # PROXMOX HOST: ASROCK 4X4 BOX-4800U, 64 GB RAM, 1 TB NVME m.2 SSD, and 2 TB SATA SSD
 # LXC: 12 Cores (limit 8), 16 GB RAM, 4 GB Swap, Ubuntu 22.04, and Docker
-# Google Drive mounted using Rclone on Proxmox host, and shared with the LXC using RO bind mount. 
+# Google  mounted using Rclone on Proxmox host, and shared with the LXC using RO bind mount. 
 
 # Docker: 23.0.3
 # Docker Compose: v2.17.2 (docker-compose-plugin for Docker)
@@ -21,7 +21,7 @@ version: "3.9"
 networks:
   t2_proxy:
     name: t2_proxy
-    driver: bridge
+    r: bridge
     ipam:
       config:
         - subnet: 192.168.90.0/24
@@ -362,7 +362,7 @@ services:
     # ports:
     #   - "$AUTOINDEX_PORT:80"
     volumes:
-      - $EXTDRIVE:/var/lib/nginx/html:ro
+      - /home/root/ext/:/var/lib/nginx/html:ro
     labels:
       - "traefik.enable=true"
       ## HTTP Routers
@@ -425,7 +425,7 @@ services:
     volumes:
       - /home/root/docker/logs/cloudserver:/logs/cloudserver:ro
       - /var/log:/var/log:ro
-      - $EXTDRIVE/zbox/var/log:/logs/zbox:ro
+      - /home/root/ext/zbox/var/log:/logs/zbox:ro
       - /home/root/docker/appdata/crowdsec/data/:/var/lib/crowdsec/data
       - /home/root/docker/appdata/crowdsec/config:/etc/crowdsec
 
@@ -1088,7 +1088,7 @@ services:
       - "81:80"
     volumes:
       - /home/root/docker/appdata/filebrowser:/config
-      - $EXTDRIVE:/data/media
+      - /home/root/ext/:/data/media
       - /home/root/:/data/home
     environment:
       TZ: $TZ
@@ -1190,7 +1190,7 @@ services:
     networks:
       - t2_proxy
     volumes:
-      - $EXTDRIVE/ssd/sitespeed:/var/lib/nginx/html:ro
+      - /home/root/ext/ssd/sitespeed:/var/lib/nginx/html:ro
     labels:
       - "traefik.enable=true"
       ## HTTP Routers
