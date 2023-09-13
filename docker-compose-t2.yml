@@ -866,7 +866,7 @@ services:
     # ports:
     #   - "$PICARD_PORT:5800"
     volumes:
-      - $DATADIR/data:rw
+      - $DATADIR/data/:rw
       - $DOCKERDIR/appdata/picard:/config:rw
       - /dev/shm:/dev/shm
     environment:
