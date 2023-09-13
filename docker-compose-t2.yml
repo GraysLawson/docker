@@ -46,26 +46,26 @@ secrets:
     file: /home/root/docker/secrets/cf_token
   traefik_forward_auth:
     file: /home/root/docker/secrets/traefik_forward_auth
-  mysql_root_password:
-    file: /home/root/docker/secrets/mysql_root_password
-  authelia_jwt_secret:
-    file: /home/root/docker/secrets/authelia_jwt_secret
-  authelia_session_secret:
-    file: /home/root/docker/secrets/authelia_session_secret
-  authelia_storage_mysql_password:
-    file: /home/root/docker/secrets/authelia_storage_mysql_password
-  authelia_notifier_smtp_password:
-    file: /home/root/docker/secrets/authelia_notifier_smtp_password
-  authelia_duo_api_secret_key:
-    file: /home/root/docker/secrets/authelia_duo_api_secret_key
-  authelia_storage_encryption_key:
-    file: /home/root/docker/secrets/authelia_storage_encryption_key
-  guac_db_name:
-    file: /home/root/docker/secrets/guac_db_name
-  guac_mysql_user:
-    file: /home/root/docker/secrets/guac_mysql_user
-  guac_mysql_password:
-    file: /home/root/docker/secrets/guac_mysql_password
+  # mysql_root_password:
+  #   file: /home/root/docker/secrets/mysql_root_password
+  # authelia_jwt_secret:
+  #   file: /home/root/docker/secrets/authelia_jwt_secret
+  # authelia_session_secret:
+  #   file: /home/root/docker/secrets/authelia_session_secret
+  # authelia_storage_mysql_password:
+  #   file: /home/root/docker/secrets/authelia_storage_mysql_password
+  # authelia_notifier_smtp_password:
+  #   file: /home/root/docker/secrets/authelia_notifier_smtp_password
+  # authelia_duo_api_secret_key:
+  #   file: /home/root/docker/secrets/authelia_duo_api_secret_key
+  # authelia_storage_encryption_key:
+  #   file: /home/root/docker/secrets/authelia_storage_encryption_key
+  # guac_db_name:
+  #   file: /home/root/docker/secrets/guac_db_name
+  # guac_mysql_user:
+  #   file: /home/root/docker/secrets/guac_mysql_user
+  # guac_mysql_password:
+  #   file: /home/root/docker/secrets/guac_mysql_password
 
 ########################### SERVICES
 services:
