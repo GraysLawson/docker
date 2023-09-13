@@ -556,7 +556,7 @@ services:
       - "8084:8080"
     volumes:
       - $DOCKERDIR/appdata/sabnzbd:/config
-      - $DATADIR/downloads:/data/downloads
+      - $DATADIR/downloads/:/data/downloads
     environment:
       PUID: $PUID
       PGID: $PGID
@@ -1011,7 +1011,7 @@ services:
       - "8443:8443"
     volumes:
       - $DOCKERDIR:/data/docker
-      - $USERDIR/server:/data/server
+      - $USERDIR/server/:/data/server
       - $DATADIR:/data/data
       - $DOCKERDIR/appdata/vscode:/config
     environment:
