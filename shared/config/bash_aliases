@@ -30,30 +30,30 @@ dip() {
   sudo docker inspect --format '{{json .}}' "$1" | jq -rs 'map(.NetworkSettings.Networks[].IPAddress) | .[]'
 }
 
-# DOCKER COMPOSE FILE BY HOSTNAME
+# docker stack deploy FILE BY HOSTNAME
 # I am sure there is a better way than using $HOSTNAME - if you do, feel free to share/contribute
 case $HOSTNAME in
     home-server)
-      alias dcrun2='sudo docker compose --profile all -f /home/$BA_USERNAME/docker/docker-compose-t2.yml'
+      alias dcrun2='sudo docker stack deploy --profile all -f /home/$BA_USERNAME/docker/docker-compose-t2.yml'
       alias traefiklogs='tail -f /home/$BA_USERNAME/docker/logs/cloudserver/traefik/traefik.log'
       ;;
     media-server)
-      alias dcrun2='sudo docker compose -f /home/$BA_USERNAME/docker/docker-compose-t2-media-db.yml'
+      alias dcrun2='sudo docker stack deploy -f /home/$BA_USERNAME/docker/docker-compose-t2-media-db.yml'
       ;;
     web-server)
-      alias dcrun2='sudo docker compose -f /home/$BA_USERNAME/docker/docker-compose-t2-web.yml'
+      alias dcrun2='sudo docker stack deploy -f /home/$BA_USERNAME/docker/docker-compose-t2-web.yml'
       alias traefiklogs='tail -f /home/$BA_USERNAME/docker/logs/webserver/traefik/traefik.log'
       ;;
     ds918) 
       alias dcrun2='sudo docker-compose -f /volume6/docker/docker-compose-t2-synology.yml'
       ;;
     DMS)
-      alias dcrun2='sudo docker compose -f /home/$BA_USERNAME/docker/docker-compose.yml'
+      alias dcrun2='sudo docker stack deploy -f /home/$BA_USERNAME/docker/docker-compose.yml'
       ;;
     *)
 esac
 
-# DOCKER COMPOSE TRAEFIK 2 - All docker-compose commands start with "dc" 
+# docker stack deploy TRAEFIK 2 - All docker-compose commands start with "dc" 
 alias dclogs2='dcrun2 logs -tf --tail="50" '
 alias dcup2='dcrun2 up -d --build --remove-orphans'
 alias dcdown2='dcrun2 down --remove-orphans'
