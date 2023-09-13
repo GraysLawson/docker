@@ -37,35 +37,35 @@ networks:
 ########################### SECRETS
 secrets:
   htpasswd:
-    file: $DOCKERDIR/secrets/htpasswd
+    file: /home/root/docker/secrets/htpasswd
   cf_email:
-    file: $DOCKERDIR/secrets/cf_email
+    file: /home/root/docker/secrets/cf_email
   cf_api_key:
-    file: $DOCKERDIR/secrets/cf_api_key
+    file: /home/root/docker/secrets/cf_api_key
   cf_token:
-    file: $DOCKERDIR/secrets/cf_token
+    file: /home/root/docker/secrets/cf_token
   traefik_forward_auth:
-    file: $DOCKERDIR/secrets/traefik_forward_auth
+    file: /home/root/docker/secrets/traefik_forward_auth
   mysql_root_password:
-    file: $DOCKERDIR/secrets/mysql_root_password
+    file: /home/root/docker/secrets/mysql_root_password
   authelia_jwt_secret:
-    file: $DOCKERDIR/secrets/authelia_jwt_secret
+    file: /home/root/docker/secrets/authelia_jwt_secret
   authelia_session_secret:
-    file: $DOCKERDIR/secrets/authelia_session_secret
+    file: /home/root/docker/secrets/authelia_session_secret
   authelia_storage_mysql_password:
-    file: $DOCKERDIR/secrets/authelia_storage_mysql_password
+    file: /home/root/docker/secrets/authelia_storage_mysql_password
   authelia_notifier_smtp_password:
-    file: $DOCKERDIR/secrets/authelia_notifier_smtp_password
+    file: /home/root/docker/secrets/authelia_notifier_smtp_password
   authelia_duo_api_secret_key:
-    file: $DOCKERDIR/secrets/authelia_duo_api_secret_key
+    file: /home/root/docker/secrets/authelia_duo_api_secret_key
   authelia_storage_encryption_key:
-    file: $DOCKERDIR/secrets/authelia_storage_encryption_key
+    file: /home/root/docker/secrets/authelia_storage_encryption_key
   guac_db_name:
-    file: $DOCKERDIR/secrets/guac_db_name
+    file: /home/root/docker/secrets/guac_db_name
   guac_mysql_user:
-    file: $DOCKERDIR/secrets/guac_mysql_user
+    file: /home/root/docker/secrets/guac_mysql_user
   guac_mysql_password:
-    file: $DOCKERDIR/secrets/guac_mysql_password
+    file: /home/root/docker/secrets/guac_mysql_password
 
 ########################### SERVICES
 services:
@@ -73,10 +73,10 @@ services:
 
   # Traefik 2 - Reverse Proxy
   # Touch (create empty files) traefik.log and acme/acme.json. Set acme.json permissions to 600.
-  # touch $DOCKERDIR/appdata/traefik2/acme/acme.json
-  # chmod 600 $DOCKERDIR/appdata/traefik2/acme/acme.json
-  # touch $DOCKERDIR/logs/cloudserver/traefik.log
-  # touch $DOCKERDIR/logs/cloudserver/access.log
+  # touch /home/root/docker/appdata/traefik2/acme/acme.json
+  # chmod 600 /home/root/docker/appdata/traefik2/acme/acme.json
+  # touch /home/root/docker/logs/cloudserver/traefik.log
+  # touch /home/root/docker/logs/cloudserver/access.log
 
   # Cloudflare DDNS - Dynamic DNS Updater
   
@@ -189,9 +189,9 @@ services:
       #   protocol: tcp
       #   mode: host
     volumes:
-      - $DOCKERDIR/appdata/traefik2/rules/cloudserver:/rules
-      - $DOCKERDIR/appdata/traefik2/acme/acme.json:/acme.json
-      - $DOCKERDIR/logs/cloudserver/traefik:/logs
+      - /home/root/docker/appdata/traefik2/rules/cloudserver:/rules
+      - /home/root/docker/appdata/traefik2/acme/acme.json:/acme.json
+      - /home/root/docker/logs/cloudserver/traefik:/logs
     environment:
       - TZ=$TZ
       - CF_API_EMAIL_FILE=/run/secrets/cf_email
@@ -336,7 +336,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - $DOCKERDIR/appdata/portainer/data/:/data
+      - /home/root/docker/appdata/portainer/data/:/data
     environment:
       - TZ=$TZ
     labels:
@@ -387,7 +387,7 @@ services:
     # ports:
     #  - "$HOMEPAGE_PORT:3000" 
     volumes:
-      - $DOCKERDIR/appdata/homepage:/app/config
+      - /home/root/docker/appdata/homepage:/app/config
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -423,11 +423,11 @@ services:
       AGENT_PASSWORD: $CROWDSEC_AGENT_PASSWORD 
       LOCAL_API_URL: $CROWDSEC_LOCAL_API_URL 
     volumes:
-      - $DOCKERDIR/logs/cloudserver:/logs/cloudserver:ro
+      - /home/root/docker/logs/cloudserver:/logs/cloudserver:ro
       - /var/log:/var/log:ro
       - $EXTDRIVE/zbox/var/log:/logs/zbox:ro
-      - $DOCKERDIR/appdata/crowdsec/data/:/var/lib/crowdsec/data
-      - $DOCKERDIR/appdata/crowdsec/config:/etc/crowdsec
+      - /home/root/docker/appdata/crowdsec/data/:/var/lib/crowdsec/data
+      - /home/root/docker/appdata/crowdsec/config:/etc/crowdsec
 
   # CrowdSec Bouncer - Traefik
   traefik-bouncer:
@@ -487,8 +487,8 @@ services:
     # ports:
     #   - "$JDOWNLOADER_PORT:5800"
     volumes:
-      - $DATADIR/downloads/:/data/downloads
-      - $DOCKERDIR/appdata/jdownloader:/config
+      - /home/root/downloads/:/data/downloads
+      - /home/root/docker/appdata/jdownloader:/config
     environment:
       USER_ID: $PUID
       GROUP_ID: $PGID
@@ -522,8 +522,8 @@ services:
     # ports:
     #   - "8081:8080" # Explosed via gluetun. 8081 because crowdsec is using port 8080
     volumes:
-      - $DOCKERDIR/appdata/qbittorrent:/config
-      - $DATADIR/downloads/:/data/downloads
+      - /home/root/docker/appdata/qbittorrent:/config
+      - /home/root/downloads/:/data/downloads
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -552,8 +552,8 @@ services:
     ports:
       - "8084:8080"
     volumes:
-      - $DOCKERDIR/appdata/sabnzbd:/config
-      - $DATADIR/downloads:/data/downloads
+      - /home/root/docker/appdata/sabnzbd:/config
+      - /home/root/downloads:/data/downloads
     environment:
       PUID: $PUID
       PGID: $PGID
@@ -592,7 +592,7 @@ services:
     ports:
       - "9696:9696"
     volumes:
-      - $DOCKERDIR/appdata/prowlarr:/config
+      - /home/root/docker/appdata/prowlarr:/config
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
@@ -624,8 +624,8 @@ services:
     ports:
       - "8989:8989"
     volumes:
-      - $DOCKERDIR/appdata/sonarr:/config
-      - $DATADIR:/data
+      - /home/root/docker/appdata/sonarr:/config
+      - /home/root/:/data
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
@@ -663,8 +663,8 @@ services:
     ports:
       - "8686:8686"
     volumes:
-      - $DOCKERDIR/appdata/lidarr:/config
-      - $DATADIR:/data
+      - /home/root/docker/appdata/lidarr:/config
+      - /home/root/:/data
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
@@ -702,8 +702,8 @@ services:
     ports:
       - "7878:7878"
     volumes:
-      - $DOCKERDIR/appdata/radarr:/config
-      - $DATADIR:/data
+      - /home/root/docker/appdata/radarr:/config
+      - /home/root/:/data
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
@@ -741,8 +741,8 @@ services:
     ports:
       - "8787:8787"
     volumes:
-      - $DOCKERDIR/appdata/readarr:/config
-      - $DATADIR:/data
+      - /home/root/docker/appdata/readarr:/config
+      - /home/root/:/data
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: $TZ
@@ -780,7 +780,7 @@ services:
       PMM_TEST: "False" #optional
       PMM_NO_MISSING: "False" #optional
     volumes:
-      - $DOCKERDIR/appdata/plex-meta-manager:/config
+      - /home/root/docker/appdata/plex-meta-manager:/config
   # Tautulli - Plex statistics and monitoring
   # Set HTTP Root in Tautulli settings if using PathPrefix
   tautulli:
@@ -794,8 +794,8 @@ services:
     ports:
       - "8181:8181"
     volumes:
-      - $DOCKERDIR/appdata/tautulli/config:/config
-      - $DOCKERDIR/appdata/plexms/Library/Application Support/Plex Media Server/Logs:/logs:ro # For tautulli Plex log viewer
+      - /home/root/docker/appdata/tautulli/config:/config
+      - /home/root/docker/appdata/plexms/Library/Application Support/Plex Media Server/Logs:/logs:ro # For tautulli Plex log viewer
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -833,8 +833,8 @@ services:
     ports:
       - "6767:6767"
     volumes:
-      - $DOCKERDIR/appdata/bazarr:/config
-      - $DATADIR/media/:/data/media
+      - /home/root/docker/appdata/bazarr:/config
+      - /home/root/media/:/data/media
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -862,8 +862,8 @@ services:
     # ports:
     #   - "$PICARD_PORT:5800"
     volumes:
-      - $DATADIR/data/:rw
-      - $DOCKERDIR/appdata/picard:/config:rw
+      - /home/root/data/:rw
+      - /home/root/docker/appdata/picard:/config:rw
       - /dev/shm:/dev/shm
     environment:
       USER_ID: $PUID
@@ -898,7 +898,7 @@ services:
       - "3000:3000"
     user: $PUID
     volumes:
-      - $DOCKERDIR/appdata/grafana:/var/lib/grafana
+      - /home/root/docker/appdata/grafana:/var/lib/grafana
     environment:
       GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,grafana-piechart-panel"
     labels:
@@ -970,8 +970,8 @@ services:
     # ports:
     #   - "$FIREFOX_PORT:5800"
     volumes:
-      - $DOCKERDIR/appdata/firefox:/config
-      - $DATADIR/downloads:/data/downloads
+      - /home/root/docker/appdata/firefox:/config
+      - /home/root/downloads:/data/downloads
       - /dev/shm:/dev/shm
     environment:
       USER_ID: $PUID
@@ -1006,10 +1006,10 @@ services:
     ports:
       - "8443:8443"
     volumes:
-      - $DOCKERDIR:/data/docker
-      - $USERDIR/server:/data/server
-      - $DATADIR:/data/data
-      - $DOCKERDIR/appdata/vscode:/config
+      - /home/root/docker/:/data/docker
+      - /home/root/server:/data/server
+      - /home/root/:/data/data
+      - /home/root/docker/appdata/vscode:/config
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -1063,7 +1063,7 @@ services:
       - t2_proxy
       - default
     volumes:
-      - $DOCKERDIR/appdata/uptime-kuma:/app/data
+      - /home/root/docker/appdata/uptime-kuma:/app/data
     labels:
       - "traefik.enable=true"
       ## HTTP Routers
@@ -1087,9 +1087,9 @@ services:
     ports:
       - "81:80"
     volumes:
-      - $DOCKERDIR/appdata/filebrowser:/config
+      - /home/root/docker/appdata/filebrowser:/config
       - $EXTDRIVE:/data/media
-      - $USERDIR:/data/home
+      - /home/root/:/data/home
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -1155,7 +1155,7 @@ services:
     # #   - 8388:8388/tcp # Shadowsocks
     # #   - 8388:8388/udp # Shadowsocks
     volumes:
-      - $DOCKERDIR/appdata/gluetun:/gluetun
+      - /home/root/docker/appdata/gluetun:/gluetun
     environment:
       TZ: $TZ
       # Wireguard
@@ -1327,7 +1327,7 @@ services:
     networks:
       - socket_proxy
     volumes:
-      - $DOCKERDIR/appdata/docker-gc/docker-gc-exclude:/etc/docker-gc-exclude
+      - /home/root/docker/appdata/docker-gc/docker-gc-exclude:/etc/docker-gc-exclude
     environment:
       CRON: 0 0 0 * * ? # Everyday at midnight. Previously 0 0 * * *
       FORCE_IMAGE_REMOVAL: 1
