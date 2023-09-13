@@ -190,7 +190,6 @@ services:
       #   mode: host
     volumes:
       - $DOCKERDIR/appdata/traefik2/rules/cloudserver:/rules
-      # - /var/run/docker.sock:/var/run/docker.sock:ro # Use Docker Socket Proxy instead for improved security
       - $DOCKERDIR/appdata/traefik2/acme/acme.json:/acme.json
       - $DOCKERDIR/logs/cloudserver/traefik:/logs
     environment:
@@ -556,7 +555,7 @@ services:
       - "8084:8080"
     volumes:
       - $DOCKERDIR/appdata/sabnzbd:/config
-      - $DATADIR/downloads/:/data/downloads
+      - $DATADIR/downloads:/data/downloads
     environment:
       PUID: $PUID
       PGID: $PGID
@@ -1011,7 +1010,7 @@ services:
       - "8443:8443"
     volumes:
       - $DOCKERDIR:/data/docker
-      - $USERDIR/server/:/data/server
+      - $USERDIR/server:/data/server
       - $DATADIR:/data/data
       - $DOCKERDIR/appdata/vscode:/config
     environment:
