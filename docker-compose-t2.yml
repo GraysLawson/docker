@@ -77,6 +77,42 @@ services:
   # chmod 600 $DOCKERDIR/appdata/traefik2/acme/acme.json
   # touch $DOCKERDIR/logs/cloudserver/traefik.log
   # touch $DOCKERDIR/logs/cloudserver/access.log
+
+  # Cloudflare DDNS - Dynamic DNS Updater
+  
+  # Cloudflare-Companion - Automatic CNAME DNS Creation
+  cf-companion:
+    container_name: cf-companion
+    image: tiredofit/traefik-cloudflare-companion:latest
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TIMEZONE=$TZ
+      - TRAEFIK_VERSION=2
+      - CF_EMAIL=$CLOUDFLARE_EMAIL # Same as traefik
+      # - CF_TOKEN=$CLOUDFLARE_API_TOKEN # Scoped api token not working. Error 10000.
+      - CF_TOKEN=$CLOUDFLARE_API_KEY # Same as traefik
+      - TARGET_DOMAIN=$DOMAINNAME_HOME_SERVER
+      - DOMAIN1=$DOMAINNAME_HOME_SERVER
+      - DOMAIN1_ZONE_ID=$CLOUDFLARE_ZONEID # Copy from Cloudflare Overview page
+      - DOMAIN1_PROXIED=TRUE
+    labels:
+      # Add hosts specified in rules here to force cf-companion to create the CNAMEs
+      # Since cf-companion creates CNAMEs based on host rules, this a workaround for non-docker/external apps
+      - "traefik.http.routers.cf-companion-rtr.rule=HostHeader(`pihole.$DOMAINNAME_HOME_SERVER`) || HostHeader(`hassio.$DOMAINNAME_HOME_SERVER`)"
+
+  cf-ddns:
+    container_name: cf-ddns
+    image: oznu/cloudflare-ddns:latest
+    restart: always
+    environment:
+      - API_KEY=$CLOUDFLARE_API_TOKEN
+      - ZONE=$DOMAINNAME_HOME_SERVER
+      - PROXIED=true
+      - RRTYPE=A
+      - DELETE_ON_STOP=false
+      - DNS_SERVER=1.1.1.1
   traefik:
     container_name: traefik
     image: traefik:2.9
