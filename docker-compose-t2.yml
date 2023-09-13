@@ -338,7 +338,7 @@ services:
       - "9000:9000"
     volumes:
       # - /var/run/docker.sock:/var/run/docker.sock:ro # # Use Docker Socket Proxy instead for improved security
-      - $DOCKERDIR/appdata/portainer/data:/data
+      - $DOCKERDIR/appdata/portainer/data/:/data
     environment:
       - TZ=$TZ
     labels:
@@ -429,7 +429,7 @@ services:
       - $DOCKERDIR/logs/cloudserver:/logs/cloudserver:ro
       - /var/log:/var/log:ro
       - $EXTDRIVE/zbox/var/log:/logs/zbox:ro
-      - $DOCKERDIR/appdata/crowdsec/data:/var/lib/crowdsec/data
+      - $DOCKERDIR/appdata/crowdsec/data/:/var/lib/crowdsec/data
       - $DOCKERDIR/appdata/crowdsec/config:/etc/crowdsec
 
   # CrowdSec Bouncer - Traefik
