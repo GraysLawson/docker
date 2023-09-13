@@ -385,7 +385,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
       - socket_proxy
@@ -592,7 +591,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     ports:
@@ -625,7 +623,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -665,7 +662,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -705,7 +701,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -745,7 +740,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -780,7 +774,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -801,7 +794,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -841,7 +833,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     ports:
@@ -871,7 +862,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: "no"
-
     networks:
       - t2_proxy
     # ports:
@@ -907,7 +897,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     ports:
@@ -936,7 +925,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
       - default
@@ -973,7 +961,6 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
 
-
   # Firefox - Web Broswer
   # VNC password not working - check
   firefox:
@@ -983,7 +970,6 @@ services:
       - no-new-privileges:true
       - seccomp:unconfined # October 15, 2020 https://github.com/jlesage/docker-firefox/blob/master/README.md#allowing-the-membarrier-system-call
     restart: unless-stopped
-
     networks:
       - t2_proxy
     # ports:
@@ -1058,7 +1044,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     labels:
@@ -1102,7 +1087,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     ports:
@@ -1133,7 +1117,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
       - socket_proxy
@@ -1211,7 +1194,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     volumes:
@@ -1318,7 +1300,6 @@ services:
   #     APIKEY: $SABNZBD_API_KEY
   #     ENABLE_ADDITIONAL_METRICS:TRUE
   #   #command: ["sabnzbd"]
-
   # Node Exporter - Metrics to Prometheus
   node-exporter:
     container_name: node-exporter
@@ -1350,7 +1331,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - socket_proxy
     volumes:
@@ -1373,7 +1353,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-
     networks:
       - t2_proxy
     labels:
@@ -1394,7 +1373,6 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
-    
     networks:
       - socket_proxy
     environment:
