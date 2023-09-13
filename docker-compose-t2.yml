@@ -281,7 +281,6 @@ services:
       - SYSTEM=0
       - TASKS=1 # Portainer
       - VOLUMES=1 # Portainer
-
   # Google OAuth - Single Sign On using OAuth 2.0
   # https://www.smarthomebeginner.com/google-oauth-with-traefik-docker/
   oauth:
