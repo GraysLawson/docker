@@ -1222,7 +1222,7 @@ services:
       PORT: 9707
       URL: "http://radarr:7878"
       APIKEY: $RADARR_API_KEY
-      ENABLE_ADDITIONAL_METRICS: TRUE
+      ENABLE_ADDITIONAL_METRICS:TRUE
     command: ["radarr"]
 
   # Sonarr Exporter - Sonarr metrics for Prometheus
@@ -1241,7 +1241,7 @@ services:
       PORT: 9708
       URL: "http://sonarr:8989"
       APIKEY: $SONARR_API_KEY
-      ENABLE_ADDITIONAL_METRICS: TRUE
+      ENABLE_ADDITIONAL_METRICS:TRUE
     command: ["sonarr"]
 
   # Lidarr Exporter - Lidarr metrics for Prometheus
@@ -1260,7 +1260,7 @@ services:
       PORT: 9709
       URL: "http://lidarr:8686"
       APIKEY: $LIDARR_API_KEY
-      ENABLE_ADDITIONAL_METRICS: TRUE
+      ENABLE_ADDITIONAL_METRICS:TRUE
     command: ["lidarr"]
 
   # Prowlarr Exporter - Prowlarr metrics for Prometheus
@@ -1279,7 +1279,7 @@ services:
       PORT: 9710
       URL: "http://prowlarr:9696"
       APIKEY: $PROWLARR_API_KEY
-      ENABLE_ADDITIONAL_METRICS: TRUE
+      ENABLE_ADDITIONAL_METRICS:TRUE
     command: ["prowlarr"]
 
   # SABnzbd Exporter - SABnzbd metrics for Prometheus
@@ -1298,7 +1298,7 @@ services:
       PORT: 9712
       URL: "http://sabnzbd:8080"
       APIKEY: $SABNZBD_API_KEY
-      ENABLE_ADDITIONAL_METRICS: TRUE
+      ENABLE_ADDITIONAL_METRICS:TRUE
     command: ["sabnzbd"]
 
   # Node Exporter - Metrics to Prometheus
