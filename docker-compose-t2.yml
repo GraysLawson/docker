@@ -42,8 +42,8 @@ secrets:
     file: /home/root/docker/secrets/cf_email
   cf_api_key:
     file: /home/root/docker/secrets/cf_api_key
-  cf_token:
-    file: /home/root/docker/secrets/cf_token
+  #cf_token:
+  #  file: /home/root/docker/secrets/cf_token
   traefik_forward_auth:
     file: /home/root/docker/secrets/traefik_forward_auth
   # mysql_root_password:
