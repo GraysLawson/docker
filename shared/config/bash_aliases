@@ -5,7 +5,7 @@
 # SOURCE ENVIRONMENTAL VARIABLES FOR BASH_ALIASES
 # Sensitive information goes into the .env file - this allows me to share my bash aliases with the community
 # Rename shared/config/bash_aliases.env.example and use it as a starter
-source ~/.bash_aliases.env
+source /home/root/docker/shared/config/bash_aliases.env
 alias myprompt='export PS1="Anand>" '
 
 # DOCKER COMMON - All docker commands start with "d"
